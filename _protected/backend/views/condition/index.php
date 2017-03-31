@@ -122,8 +122,8 @@ echo DynaGrid::widget([
             '{export}',
             ['content'=>  Html::dropDownList('aid', Yii::$app->session['active_aid'], $aid_list, ['class'=>'form-control', 'id'=>'list', 'prompt'=>'تسليم المساعدات'])],
             ['content'=>Html::a('تفعيل', 'javascript:activateAid();', ['class'=>'btn btn-success'])],
-            ['content'=>Html::a('طباعة الكارنيهات', 'javascript:multiCards();', ['class'=>'btn btn-warning', 'id'=>'multi-cards', 'disabled'=>'', 'name'=>'cards', 'value'=>'1'])],
-            ['content'=>Html::submitButton('طباعة الظهر', ['class'=>'btn btn-warning', 'id'=>'multi-cards-backs', 'disabled'=>'', 'name'=>'cardsBacks', 'value'=>'1'])],
+            ['content'=>Html::a('طباعة الكارنيهات', 'javascript:multiCards(0);', ['class'=>'btn btn-warning', 'id'=>'multi-cards', 'disabled'=>'', 'name'=>'cards', 'value'=>'1'])],
+            ['content'=>Html::a('طباعة الظهر', 'javascript:multiCards(1);', ['class'=>'btn btn-warning', 'id'=>'multi-cards-backs', 'disabled'=>'', 'name'=>'cardsBacks', 'value'=>'1'])],
             ['content'=>Html::a('تسليم بالباركود', Yii::$app->urlManager->createUrl('condition/barcode-delivery'), ['class'=>'btn btn-info'])],
         ]
     ],
@@ -228,8 +228,11 @@ $(document).on('change', ':checkbox', function (event){
     //$("#sel").val($("td :checkbox:checked").map(function() {return this.value;}).get().join(','));
 });
         
-function multiCards() {
-        document.location.href="$baseUrl/condition/multi-cards?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
+function multiCards(backs) {
+        if(backs == 0)
+            document.location.href="$baseUrl/condition/multi-cards?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
+        else
+            document.location.href="$baseUrl/condition/multi-cards-backs?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
         }
    
 JS;

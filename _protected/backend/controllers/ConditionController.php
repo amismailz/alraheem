@@ -57,10 +57,9 @@ class ConditionController extends BackendController {
         return $this->render('multi-cards', ['models' => $models]);
     }
 
-    public function actionMultiCardsBacks() {
+    public function actionMultiCardsBacks($sel) {
         $this->layout = 'cards';
-        $selections = Yii::$app->request->get('selection');
-        return $this->render('multi-cards-backs', ['selections' => $selections]);
+        return $this->render('multi-cards-backs', ['selections' => explode(',', $sel)]);
     }
 
     public function actionActivateAid($aid = '') {
