@@ -12,7 +12,7 @@ $rightCol = array_slice($models, intval($count / 2));
 
 <div class="row">
     <div class="left-col">
-<?php if (!empty($leftCol)) foreach ($leftCol as $item) { ?>
+        <?php if (!empty($leftCol)) foreach ($leftCol as $item) { ?>
                 <div class="card-item">
                     <div class="header">
                         <h2>جمعية الرحيم الخيرية</h2>
@@ -36,7 +36,7 @@ $rightCol = array_slice($models, intval($count / 2));
                                             <td class="status">(<?= $item->aidType->code ?>)</td>
                                         </tr>
                                         <tr>
-                                            <td id="<?= $item->id ?>" class="barcode" colspan="2"></td>
+                                            <td class="barcode" colspan="2"><div id="<?= $item->id ?>"></div><span><?= $item->id ?></span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -48,10 +48,10 @@ $rightCol = array_slice($models, intval($count / 2));
                         <img src="<?= Yii::$app->request->baseUrl ?>/img/signature.png" class="signature">
                     </div>
                 </div>
-    <?php } ?>
+            <?php } ?>
     </div>
     <div class="right-col">
-<?php if (!empty($rightCol)) foreach ($rightCol as $item) { ?>
+        <?php if (!empty($rightCol)) foreach ($rightCol as $item) { ?>
                 <div class="card-item">
                     <div class="header">
                         <h2>جمعية الرحيم الخيرية</h2>
@@ -75,7 +75,7 @@ $rightCol = array_slice($models, intval($count / 2));
                                             <td class="status">(<?= $item->aidType->code ?>)</td>
                                         </tr>
                                         <tr>
-                                            <td id="<?= $item->id ?>" class="barcode" colspan="2"></td>
+                                            <td class="barcode" colspan="2"><div id="<?= $item->id ?>"></div><span><?= $item->id ?></span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -87,17 +87,20 @@ $rightCol = array_slice($models, intval($count / 2));
                         <img src="<?= Yii::$app->request->baseUrl ?>/img/signature.png" class="signature">
                     </div>
                 </div>
-    <?php } ?>
+            <?php } ?>
     </div>
 </div>
 </div>    
-<div id="showBarcode"></div>
 <?php
 foreach ($models as $model) {
-    $optionsArray = array(
+    $optionsArray = [
+        'settings' => [
+            'output' => 'bmp', /* css, bmp, svg, canvas */
+            'barHeight' => 30,
+        ],
         'elementId' => $model->id, /* div or canvas id */
         'value' => $model->id, /* value for EAN 13 be careful to set right values for each barcode type */
-        'type' => 'ean13', /* supported types  ean8, ean13, upc, std25, int25, code11, code39, code93, code128, codabar, msi, datamatrix */
-    );
+        'type' => 'code11', /* supported types  ean8, ean13, upc, std25, int25, code11, code39, code93, code128, codabar, msi, datamatrix */
+    ];
     echo BarcodeGenerator::widget($optionsArray);
 }

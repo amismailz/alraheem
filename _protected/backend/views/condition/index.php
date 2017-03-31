@@ -144,6 +144,7 @@ Modal::end();
 ?>
 <?php $this->registerCss('.panel-heading {display: none} '
         . '.summary{ float: left;}') ;
+$baseUrl = Yii::$app->request->baseUrl;
 $url = Yii::$app->urlManager->createUrl('condition/activate-aid') ;   
 $delivery_url = Yii::$app->urlManager->createUrl('condition/ajax-delivery') ;   
 $cancel_url = Yii::$app->urlManager->createUrl('condition/ajax-cancel') ;   
@@ -228,7 +229,7 @@ $(document).on('change', ':checkbox', function (event){
 });
         
 function multiCards() {
-        document.location.href="./condition/multi-cards?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
+        document.location.href="$baseUrl/condition/multi-cards?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
         }
    
 JS;
