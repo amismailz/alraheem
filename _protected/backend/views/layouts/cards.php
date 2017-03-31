@@ -38,7 +38,7 @@ use yii\widgets\Breadcrumbs;
                     float: left;
                 }
                 .left-col .card-item{
-                    margin-right: 1.25cm;
+                    margin-right: 1cm;
                     float: right;
                 }
                 .right-col .card-item{
