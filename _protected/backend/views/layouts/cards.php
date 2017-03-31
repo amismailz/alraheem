@@ -50,7 +50,7 @@ use yii\widgets\Breadcrumbs;
                     height: 5.5cm;/*2.125in*/
                     position: relative;
                     display: block;
-                    margin-top: 10px;
+                    margin-top: 50px;
                     background-color: #f1f4f9;
                     -webkit-print-color-adjust: exact;
                     -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
@@ -94,7 +94,7 @@ use yii\widgets\Breadcrumbs;
                 figcaption{
                     display: inline-block;
                     position: absolute;
-                    bottom: 0;
+                    bottom: -15px;
                     right: 0;
                 }
                 table{
@@ -120,6 +120,10 @@ use yii\widgets\Breadcrumbs;
                 }
                 .barcode{
                     text-align: center;
+                    padding-right: 75px;
+                }
+                .barcode span{
+                    font-size: 12px;
                 }
                 .side{
                     position: absolute;
