@@ -67,7 +67,7 @@ use yii\widgets\Breadcrumbs;
                     text-align: center;
                     font-weight: 700;
                     font-size: 28px;
-                    background-color: #fecc4e;
+                    background-color: #98BC37;
                     -webkit-print-color-adjust: exact;
                     margin-top: 0;
                     margin-bottom: 0;
