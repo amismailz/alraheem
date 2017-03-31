@@ -50,7 +50,7 @@ use yii\widgets\Breadcrumbs;
                     height: 5.5cm;/*2.125in*/
                     position: relative;
                     display: block;
-                    margin-top: 50px;
+                    margin-top: 47px;
                     background-color: #f1f4f9;
                     -webkit-print-color-adjust: exact;
                     -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
