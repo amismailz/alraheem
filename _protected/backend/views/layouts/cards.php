@@ -13,7 +13,6 @@ use yii\widgets\Breadcrumbs;
 ?>
 <?php $this->beginPage() ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
