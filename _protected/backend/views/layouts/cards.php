@@ -122,6 +122,9 @@ use yii\widgets\Breadcrumbs;
                     text-align: center;
                     padding-right: 75px;
                 }
+                .barcode div{
+                    margin-bottom: -7px;
+                }
                 .barcode span{
                     font-size: 12px;
                 }
