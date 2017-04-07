@@ -395,6 +395,11 @@ a:focus {
 .margin-50 {
   margin-right: 50px !important;
 }
+@media (max-width: 667px){
+  .margin-50{
+  margin-right: 0px !important;
+}
+}
 .main-sidebar,
 .left-side {
   position: absolute;

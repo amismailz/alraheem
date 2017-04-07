@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
     var Dropdown = function (element) {
-    $(element).on('hover.bs.dropdown', this.toggle)
+    $(element).on('hover.bs.dropdown', this.toggle);
   };
 
   
@@ -70,7 +70,10 @@ $(function(){
 
 });
 
-
+$("#bs-example-navbar-collapse-111").hide();
+$("#nav-collapse111").click(function () {
+    $("#bs-example-navbar-collapse-111").show();
+})
 // Tab
 $('#myTabs a').click(function (e) {
   e.preventDefault()

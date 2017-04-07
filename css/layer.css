@@ -1,5 +1,15 @@
 
 /************** Global ***********/
+@font-face {
+  font-family: 'Droid Arabic Kufi';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Droid Arabic Kufi"), url("../fonts/DroidKufi-Regular.ttf") format("truetype"); }
+@font-face {
+  font-family: 'droid-ar-kufi-bold';
+  font-style: lighter;
+  font-weight: lighter;
+  src: local("Droid Arabic Kufi"), url("../fonts/DroidKufi-Bold.ttf") format("truetype"); }
 .fl-left{
 	float: left;
 }
