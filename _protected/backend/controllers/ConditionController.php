@@ -52,13 +52,13 @@ class ConditionController extends BackendController {
     }
 
     public function actionMultiCards($sel) {
-        $this->layout = 'cards';
+        $this->layout = 'condition-card-layout';
         $models = Condition::find()->where(['in', 'id', explode(',', $sel)])->all();
         return $this->render('multi-cards', ['models' => $models]);
     }
 
     public function actionMultiCardsBacks($sel) {
-        $this->layout = 'cards';
+        $this->layout = 'condition-card-layout';
         return $this->render('multi-cards-backs', ['selections' => explode(',', $sel)]);
     }
 
