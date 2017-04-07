@@ -48,7 +48,7 @@ $rightCol = array_slice($models, intval($count / 2));
                         </figure>
                     </div>
                     <div class="side">
-                        <img src="<?= Yii::$app->request->baseUrl ?>/media/condition/<?= $item->photo? $item->photo : 'avatar.png' ?>" class="user-image">
+                        <img src="<?= Yii::$app->request->baseUrl ?>/media/member/<?= $item->photo? $item->photo : 'avatar.png' ?>" class="user-image">
                         <img src="<?= Yii::$app->request->baseUrl ?>/img/signature.png" class="signature">
                     </div>
                 </div>
@@ -91,7 +91,7 @@ $rightCol = array_slice($models, intval($count / 2));
                         </figure>
                     </div>
                     <div class="side">
-                        <img src="<?= Yii::$app->request->baseUrl ?>/media/condition/<?= $item->photo? $item->photo : 'avatar.png' ?>" class="user-image">
+                        <img src="<?= Yii::$app->request->baseUrl ?>/media/member/<?= $item->photo? $item->photo : 'avatar.png' ?>" class="user-image">
                         <img src="<?= Yii::$app->request->baseUrl ?>/img/signature.png" class="signature">
                     </div>
                 </div>
