@@ -96,11 +96,11 @@ foreach ($models as $model) {
     $optionsArray = [
         'settings' => [
             'output' => 'bmp', /* css, bmp, svg, canvas */
-            'barHeight' => 30,
+            'barHeight' => 35,
         ],
         'elementId' => $model->id, /* div or canvas id */
         'value' => $model->id, /* value for EAN 13 be careful to set right values for each barcode type */
-        'type' => 'code11', /* supported types  ean8, ean13, upc, std25, int25, code11, code39, code93, code128, codabar, msi, datamatrix */
+        'type' => 'codabar', /* supported types  ean8, ean13, upc, std25, int25, code11, code39, code93, code128, codabar, msi, datamatrix */
     ];
     echo BarcodeGenerator::widget($optionsArray);
 }
