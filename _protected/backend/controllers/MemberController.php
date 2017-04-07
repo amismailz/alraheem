@@ -30,6 +30,17 @@ class MemberController extends BackendController
         ]);
     }
     
+        public function actionMultiCards($sel) {
+        $this->layout = 'member-card-layout';
+        $models = Member::find()->where(['in', 'id', explode(',', $sel)])->all();
+        return $this->render('multi-cards', ['models' => $models]);
+    }
+
+    public function actionMultiCardsBacks($sel) {
+        $this->layout = 'member-card-layout';
+        return $this->render('multi-cards-backs', ['selections' => explode(',', $sel)]);
+    }
+    
     public function actionPayments($id)
     {
         $member = $this->findModel($id);

@@ -17,7 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a(Yii::t('app', 'اضافة عضو'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::submitButton('طباعة الكارنيهات', ['class'=>'btn btn-warning', 'id'=>'multi-cards', 'disabled'=>'', 'name'=>'cards', 'value'=>'1']) ?>
+        <?= Html::a('طباعة الكارنيهات', 'javascript:multiCards(0);', ['class'=>'btn btn-warning', 'id'=>'multi-cards', 'disabled'=>'', 'name'=>'cards', 'value'=>'1']) ?>
+        <?= Html::a('طباعة الظهر', 'javascript:multiCards(1);', ['class'=>'btn btn-warning', 'id'=>'multi-cards-backs', 'disabled'=>'', 'name'=>'cardsBacks', 'value'=>'1']) ?>
     </p>
     <?php //$form = ActiveForm::begin(['action' => Yii::$app->urlManager->createUrl('condition/index'), 'method' => 'get', 'options' => ['target' => '_blank']]);
     ?>
@@ -69,85 +70,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 <?php
-//$script = <<< JS
-//function activateAid()
-//{
-//    document.location.href="$url?aid="+$("#list").val();
-//}
-//function delivery(aid_id, model_id)
-//{
-//    var btn = $('#off'+model_id);
-//    $.ajax({
-//        url: "$delivery_url",
-//        data: {'model_id': model_id, 'aid_id': aid_id},
-//        beforeSend: function(){
-//            btn.button('loading');
-//        }
-//
-//        }).done(function (data) {
-//            if(data == '1')
-//                {              
-//                    btn.removeClass('btn-danger').addClass('btn-success'); 
-//                        setTimeout(function () {
-//                                  btn.html('<i class="fa fa-check"></i>');
-//                                }, 300)
-//                }
-//                else alert('Please verify your data and refresh the page.');
-//                
-//        }).fail(function() {
-//            alert("Somthing Went Error.");
-//            }).always(function() {
-//                      btn.button('reset')
-//        });
-//}
-//function cancel(aid_id, model_id)
-//{
-//    var btn = $('#on'+model_id);
-//    $.ajax({
-//        url: "$cancel_url",
-//        data: {'model_id': model_id, 'aid_id': aid_id},
-//        beforeSend: function(){
-//            btn.button('loading');
-//        }
-//
-//        }).done(function (data) {
-//            if(data == '1')
-//                {                   
-//                    btn.removeClass('btn-success').addClass('btn-danger');
-//                    setTimeout(function () {
-//                                  btn.html('<i class="fa fa-close"></i>');
-//                                }, 300)
-//                    
-//                }
-//                else alert('Please verify your data and refresh the page.');
-//                
-//        }).fail(function() {
-//            alert("Somthing Went Error.");
-//        }).always(function() {         
-//            btn.button('reset');               
-//        });
-//}
-// 
-//function showHistory(model_id)
-//{
-//   $('#modal-content').load("$history_url?model_id="+model_id);
-//   $("#myModal").modal("show");
-//}
-//        
-//$(document).on('change', ':checkbox', function (event){
-//    if ($("td :checkbox:checked").length > 0)
-//    {
-//        $("#multi-cards").removeAttr('disabled');
-//        $("#multi-cards-backs").removeAttr('disabled');
-//    }
-//    else
-//    {
-//        $("#multi-cards").attr('disabled', '');
-//        $("#multi-cards-backs").attr('disabled', '');
-//    }
-//    //$("#sel").val($("td :checkbox:checked").map(function() {return this.value;}).get().join(','));
-//});
-//   
-//JS;
-//$this->registerJs($script, \yii\web\View::POS_END);    
+$baseUrl = Yii::$app->request->baseUrl;
+
+$script = <<< JS
+$(document).on('change', ':checkbox', function (event){
+    if ($("td :checkbox:checked").length > 0)
+    {
+        $("#multi-cards").removeAttr('disabled');
+        $("#multi-cards-backs").removeAttr('disabled');
+    }
+    else
+    {
+        $("#multi-cards").attr('disabled', '');
+        $("#multi-cards-backs").attr('disabled', '');
+    }
+});
+        
+function multiCards(backs) {
+        if(backs == 0)
+            document.location.href="$baseUrl/member/multi-cards?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
+        else
+            document.location.href="$baseUrl/member/multi-cards-backs?sel="+$("td :checkbox:checked").map(function() {return this.value;}).get().join(',');
+        }  
+JS;
+$this->registerJs($script, \yii\web\View::POS_END);    
 ?>
