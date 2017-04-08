@@ -67,7 +67,7 @@ use yii\widgets\Breadcrumbs;
                     text-align: center;
                     font-weight: 700;
                     font-size: 28px;
-                    background-color: #98BC37;
+                    background-color: #00ccff;
                     -webkit-print-color-adjust: exact;
                     margin-top: 0;
                     margin-bottom: 0;
@@ -101,7 +101,8 @@ use yii\widgets\Breadcrumbs;
                     direction: rtl;
                 }
                 .name-row{
-                    height: 45px;
+                    height: 22px;
+                    overflow: hidden;
                 }
                 tr{
                     display: inline-block;
@@ -113,7 +114,17 @@ use yii\widgets\Breadcrumbs;
                     width: 80px;
                     margin: 0;
                 }
-                .name,.id-number,.status{
+                .membership-num{
+                    font-family: "droid arabic kufi";
+                    font-weight:600;
+                    font-size: 10px;
+                    width: 80px;
+                    margin: 0;
+                }
+                .name-tag{
+                    vertical-align: top;
+                }
+                .name,.id-number,.status,.membership{
                     font-weight: 500;
                     width: 150px;
                     margin: 0;

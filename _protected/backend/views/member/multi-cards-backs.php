@@ -14,14 +14,14 @@ $rightCol = array_slice($selections, intval($count / 2));
     <div class="left-col">
         <?php if (!empty($leftCol)) foreach ($leftCol as $item) { ?>
                 <div class="card-item">
-                    <img src="<?= Yii::$app->request->baseUrl.'/img/back.png' ?>" class="back-side">
+                    <img src="<?= Yii::$app->request->baseUrl.'/img/back1.png' ?>" class="back-side">
                 </div>
             <?php } ?>
     </div>
     <div class="right-col">
         <?php if (!empty($rightCol)) foreach ($rightCol as $item) { ?>
                 <div class="card-item">
-                    <img src="<?= Yii::$app->request->baseUrl.'/img/back.png' ?>" class="back-side">
+                    <img src="<?= Yii::$app->request->baseUrl.'/img/back1.png' ?>" class="back-side">
                 </div>
             <?php } ?>
     </div>

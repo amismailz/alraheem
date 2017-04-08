@@ -36,8 +36,8 @@ $rightCol = array_slice($models, intval($count / 2));
                                             <td class="status"><?= $item->job->title ?></td>
                                         </tr>
                                         <tr>
-                                            <td class="status-tag">رقم العضوية:</td>
-                                            <td class="status">(<?= $item->membership_number ?>)</td>
+                                            <td class="membership-num">رقم العضوية:</td>
+                                            <td class="membership">(<?= $item->membership_number ?>)</td>
                                         </tr>
                                         <tr>
                                             <td class="barcode" colspan="2"><div id="<?= $item->id ?>"></div><span><?= $item->id ?></span></td>
@@ -79,8 +79,8 @@ $rightCol = array_slice($models, intval($count / 2));
                                             <td class="status"><?= $item->job->title ?></td>
                                         </tr>
                                         <tr>
-                                            <td class="status-tag">رقم العضوية:</td>
-                                            <td class="status">(<?= $item->membership_number ?>)</td>
+                                            <td class="membership-num">رقم العضوية:</td>
+                                            <td class="membership">(<?= $item->membership_number ?>)</td>
                                         </tr>
                                         <tr>
                                             <td class="barcode" colspan="2"><div id="<?= $item->id ?>"></div><span><?= $item->id ?></span></td>
