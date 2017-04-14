@@ -44,7 +44,7 @@ AppAsset::register($this);
           <span class="logo-lg"><b>Alraheem</b>Admin</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top <?php if(Yii::$app->params['sidebar'] == 'fullScreen') echo 'margin-50' ?>" role="navigation">
+        <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
