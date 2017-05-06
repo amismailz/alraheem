@@ -35,7 +35,6 @@ class ConditionController extends BackendController {
      * @return mixed
      */
     public function actionIndex() {
-        Yii::$app->params['sidebar'] = 'fullScreen';
         $searchModel = new ConditionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->pagination->pageSizeLimit = [1, 200];

@@ -31,7 +31,7 @@ AppAsset::register($this);
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/droid-arabic-kufi" type="text/css"/>
     <?php $this->head() ?>
   </head>
-  <body class="skin-blue sidebar-mini sidebar-open">
+  <body class="skin-blue sidebar-mini">
       <?php $this->beginBody() ?>
     <div class="wrapper">
 
