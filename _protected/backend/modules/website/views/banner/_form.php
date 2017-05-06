@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <!--?= $form->field($model, 'details')->widget(MultiLanguageActiveField::className(), ['inputType'=>'textArea']) ?-->
 
-    <?= $form->field($model, 'image', ['labelOptions' => ['label' => 'Image (1600*600 px)']])->fileInput() ?>
+    <?= $form->field($model, 'image', ['labelOptions' => ['label' => 'Image (1280*600 px)']])->fileInput() ?>
     <div class="form-group field-banner-image">
         <?php
         if ($model->image != '') {

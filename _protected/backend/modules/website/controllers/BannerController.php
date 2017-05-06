@@ -1,21 +1,17 @@
 <?php
 
-namespace backend\controllers;
+namespace backend\modules\website\controllers;
 
 use Yii;
-use backend\models\Banner;
-use backend\models\BannerSearch;
-use backend\controllers\BackendController;
+use backend\modules\website\models\Banner;
+use backend\modules\website\models\BannerSearch;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
  * BannerController implements the CRUD actions for Banner model.
  */
-class BannerController extends BackendController
+class BannerController extends BaseController
 {
-
     /**
      * Lists all Banner models.
      * @return mixed

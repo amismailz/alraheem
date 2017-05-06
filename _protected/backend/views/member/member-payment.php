@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
             echo '<tr>';
             $payment = $member->isPayed($m, $y);
             if($payment)
-                    echo '<td><a class="btn btn-success" title="'.$payment->payed_at.'" href="'.Url::to(['cancel-payment', 'id'=>$member->id, 'y'=>$y, 'm'=>$m]).'" data-confirm="هل تريد الغاء الدفع بالفعل؟"><i class="fa fa-check"></i></a> </td>';
+                    echo '<td><a class="btn btn-success" title="'.$payment->payed_at.'" href="'.Url::to(['toggle-payment', 'id'=>$member->id, 'y'=>$y, 'm'=>$m]).'" data-confirm="هل تريد الغاء الدفع بالفعل؟"><i class="fa fa-check"></i></a> </td>';
             else
-                    echo '<td><a class="btn btn-danger" title="لم يتم الدفع" href="'.Url::to(['apply-payment', 'id'=>$member->id, 'y'=>$y, 'm'=>$m]).'"><i class="fa fa-close"></i></a></td>';
+                    echo '<td><a class="btn btn-danger" title="لم يتم الدفع" href="'.Url::to(['toggle-payment', 'id'=>$member->id, 'y'=>$y, 'm'=>$m]).'"><i class="fa fa-close"></i></a></td>';
             echo '<td>'.$m.'/'.$y.'</td>';
         echo '</tr>';
         }

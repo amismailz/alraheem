@@ -48,7 +48,7 @@ class SiteController extends Controller {
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'send-sms'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -84,10 +84,13 @@ class SiteController extends Controller {
         $members = $id ? [ Member::findOne($id)] : Member::find()->all();
         if (empty(reset($members)))
             throw new NotFoundHttpException('The requested page does not exist.');
+        $response = [];
         if (!empty($members))
             foreach ($members as $member) {
-                self::sendMemberSms($member);
+                if (strlen($member->phone) === 11)
+                    $response[] = self::sendMemberSms($member);
             }
+        var_dump($response);
     }
 
     public static function sendMemberSms($member) {
@@ -98,18 +101,19 @@ class SiteController extends Controller {
         $notPayedMonths = [];
         for ($y = $firstYear; $y <= $lastYear; $y++) {
             for ($m = 1; $m <= ($y == $lastYear ? date('m') : 12); $m++) {
-                $payment = $member->isPayed($m, $y);
+                ////$payment = $member->isPayed($m, $y);
                 if (!$member->isPayed($m, $y))
                     $notPayedMonths[] = $m;
             }
         }
-        // reverse array to be rtl for arabic
-        $rtlArray = array_reverse($notPayedMonths);
-        // @todo adjust array length to not exceed sms limit
-        $text = implode(',', array_slice($rtlArray, 0, 7)) . 'يرجى سداد الاشتراك الشهري عن شهر ';
-        $client = new Client();
-        $response = $client->Messages->Send($member->phone, $text, '201017083603'); // send regular massage
-        die(var_dump($response));
+        if (!empty($notPayedMonths)) {
+            // reverse array to be rtl for arabic
+            $rtlArray = array_reverse($notPayedMonths);
+            // @todo adjust array length to not exceed sms limit
+            $text = 'نذكركم بالاشتراك الشهري عن شهر ' . implode(',', array_slice($rtlArray, 0, 7));
+            $client = new Client();
+            return $client->Messages->Send(intval("2$member->phone"), $text, "Alra7eem"); // send regular massage
+        }
     }
 
 //------------------------------------------------------------------------------------------------//
