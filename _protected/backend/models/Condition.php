@@ -41,6 +41,7 @@ use Yii;
  */
 class Condition extends \yii\db\ActiveRecord
 {
+    const TYPE_REJECTED = 6;
     public function behaviors()
     {
         return [

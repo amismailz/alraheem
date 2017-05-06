@@ -12,6 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
+        'website' => [
+            'class' => 'backend\modules\website\Website',
+        ],
         'dynagrid' => [
             'class' => '\kartik\dynagrid\Module',
             'maxPageSize' => 200,

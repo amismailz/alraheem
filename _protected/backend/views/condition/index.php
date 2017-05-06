@@ -2,10 +2,9 @@
 
 use yii\helpers\Html;
 use kartik\dynagrid\DynaGrid;
-use kartik\grid\GridView;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
-use yii\bootstrap\ActiveForm;
+use backend\models\Condition;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ConditionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -100,14 +99,18 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
     //['class'=>'kartik\grid\CheckboxColumn',  'order'=>DynaGrid::ORDER_FIX_RIGHT],
 ];
-//$form = ActiveForm::begin(['action'=>Yii::$app->urlManager->createUrl('condition/index'), 'method'=>'get', 'options'=>['target'=>'_blank']]);
 echo DynaGrid::widget([
     'columns'=>$columns,
     'storage'=>DynaGrid::TYPE_COOKIE,
-    'theme'=>'panel-danger',
+    //'theme'=>false,
     'gridOptions'=>[
         'dataProvider'=>$dataProvider,
         'filterModel'=>$searchModel,
+        'rowOptions'=>function(Condition $model){
+            if($model->type_id == Condition::TYPE_REJECTED){
+                return ['style' => 'background-color: #f56954 !important'];
+            }
+        },
         'panel'=>[
             //'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i>  Library</h3>',
             'before' =>  '{summary}',
@@ -130,7 +133,6 @@ echo DynaGrid::widget([
     'options'=>['id'=>'dynagrid-1'] // a unique identifier is important
 ]);
     ?>
-<?php //ActiveForm::end(); ?>
 </div>
 <?php
 Modal::begin([
