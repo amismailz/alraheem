@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'phone',
         // 'address',
         'membership_number',
+        'amount',
         [
             'label' => 'اشتراك هذا الشهر',
             'value' => function(\backend\models\Member $model) {

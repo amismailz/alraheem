@@ -27,7 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'title',
+            'details:raw',
             'sort',
+            
         ],
     ]) ?>
 

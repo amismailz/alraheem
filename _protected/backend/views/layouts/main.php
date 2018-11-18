@@ -44,7 +44,7 @@ AppAsset::register($this);
           <span class="logo-lg"><b>Alraheem</b>Admin</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top <?php if(Yii::$app->params['sidebar'] == 'fullScreen') echo 'margin-50' ?>" role="navigation">
+        <nav class="navbar navbar-static-top margin-50" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
@@ -96,7 +96,7 @@ AppAsset::register($this);
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="<?php if(Yii::$app->params['sidebar'] == 'fullScreen') echo 'margin-50' ?>">
+            <h1 class="margin-50">
             <?= Html::encode($this->title) ?>
           </h1>
           <?= Breadcrumbs::widget([
@@ -105,7 +105,7 @@ AppAsset::register($this);
         </section>
 
         <!-- Main content -->
-        <section class="content <?php if(Yii::$app->params['sidebar'] == 'fullScreen') echo 'margin-50' ?>">
+        <section class="content margin-50">
           <div class="box">
                 <div class="box-body">
                     <?= $content ?>

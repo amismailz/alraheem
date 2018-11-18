@@ -23,6 +23,8 @@ use yii\helpers\Url;
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'membership_number')->textInput() ?>
+    
+    <?= $form->field($model, 'amount')->textInput() ?>
 
     <?= $form->field($model, 'photo', ['labelOptions'=>['label'=>'صورة '.' 90*110']])->fileInput() ?>
     

@@ -141,6 +141,14 @@ class ConditionController extends BackendController {
                 $path = Yii::getAlias('@webroot') . '/media/condition/' . $model->photo;
                 $file->saveAs($path);
             }
+            $file2 = \yii\web\UploadedFile::getInstance($model, 'papers_pdf');
+            if (!empty($file2)) {
+                $ext = end((explode('.', $file2->name)));
+                $rand = Yii::$app->security->generateRandomString();
+                $model->papers_pdf = $rand . '.' . $ext;
+                $path = Yii::getAlias('@webroot') . '/media/condition/pdf/' . $model->papers_pdf;
+                $file2->saveAs($path);
+            }
 
             if ($model->save())
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -160,6 +168,7 @@ class ConditionController extends BackendController {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
         $old = $model->photo;
+        $old_pdf = $model->papers_pdf;
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->photo = $old;
             $file = \yii\web\UploadedFile::getInstance($model, 'photo');
@@ -170,6 +179,17 @@ class ConditionController extends BackendController {
                     $model->photo = $rand . '.' . $ext;
                 }
                 $path = Yii::getAlias('@webroot') . '/media/condition/' . $model->photo;
+                $file->saveAs($path);
+            }
+            $model->papers_pdf = $old_pdf;
+            $file = \yii\web\UploadedFile::getInstance($model, 'papers_pdf');
+            if (!empty($file)) {
+                if ($model->papers_pdf == '') {
+                    $ext = end((explode('.', $file->name)));
+                    $rand = Yii::$app->security->generateRandomString();
+                    $model->papers_pdf = $rand . '.' . $ext;
+                }
+                $path = Yii::getAlias('@webroot') . '/media/condition/pdf/' . $model->papers_pdf;
                 $file->saveAs($path);
             }
 
@@ -191,6 +211,18 @@ class ConditionController extends BackendController {
     public function actionDeletePhoto($id) {
         $model = $this->findModel($id);
         $model->photo = '';
+        $model->save(false);
+        return $this->redirect(['update', 'id' => $model->id]);
+    }
+    /**
+     * Deletes the photo for an existing Condition model.
+     * If delete is successful, the browser will be redirected to the 'update' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDeletePdf($id) {
+        $model = $this->findModel($id);
+        $model->papers_pdf = '';
         $model->save(false);
         return $this->redirect(['update', 'id' => $model->id]);
     }

@@ -2,6 +2,9 @@
 
 namespace backend\modules\website\models;
 
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\db\Expression;
 use Yii;
 
 /**
@@ -13,30 +16,30 @@ use Yii;
  * @property string $details
  * @property string $image
  * @property string $slug
- * @property string $date_created
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $created_by
+ * @property string $updated_by
  * @property integer $featured
- * @property integer $temp2
  */
-class News extends \yii\db\ActiveRecord
-{
+class News extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{web_news}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['title'], 'required'],
             [['details'], 'string'],
-            [['date_created'], 'safe'],
-            [['featured', 'temp2'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['featured'], 'integer'],
             [['title', 'image', 'slug'], 'string', 'max' => 255],
             [['intro'], 'string', 'max' => 555]
         ];
@@ -45,8 +48,7 @@ class News extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'title' => 'Title',
@@ -54,19 +56,27 @@ class News extends \yii\db\ActiveRecord
             'details' => 'Details',
             'image' => 'Image',
             'slug' => 'Slug',
-            'date_created' => 'Date Created',
-            'featured' => 'Featured',
-            'temp2' => 'Temp2',
+            'created_at' => 'Created At',
+            'created_at' => 'Updated At',
+            'featured' => 'Featured'
         ];
     }
-	public function behaviors()
-	{
-		return [
-			[
-			'class' => \yii\behaviors\SluggableBehavior::className(),
-			'attribute' => 'title',
-			'slugAttribute' => 'slug',
-			],
-		];
-	}
+
+    public function behaviors() {
+        return [
+            [
+                'class' => \yii\behaviors\SluggableBehavior::className(),
+                'attribute' => 'title',
+                'slugAttribute' => 'slug',
+            ],
+            [
+                'class' => TimestampBehavior::className(),
+                //'createdAtAttribute' => 'create_time',
+                //'updatedAtAttribute' => 'update_time',
+                'value' => new Expression('NOW()'),
+            ],
+            BlameableBehavior::className(),
+        ];
+    }
+
 }

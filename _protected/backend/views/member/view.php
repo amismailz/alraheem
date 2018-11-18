@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'address',
             'membership_number',
+            'amount',
             [
                 'attribute' => 'photo',
                 'value' => Html::img(Yii::$app->request->baseUrl . '/media/member/' . $model->photo, ['width' => 300]),

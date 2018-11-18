@@ -19,8 +19,6 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'mobile')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'type_id')->dropDownList(backend\models\ConditionType::getAll(), ['prompt'=>Yii::t('app', 'Select Type')]) ?>
 
     <?= $form->field($model, 'zone_id')->dropDownList(\backend\models\Zone::getAll(), ['prompt'=>Yii::t('app', 'Select Zone')]) ?>
@@ -36,8 +34,8 @@ use yii\helpers\Url;
     <?= $form->field($model, 'research_num')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'num_person')->textInput() ?>
-    <?= $form->field($model, 'photo', ['labelOptions'=>['label'=>'صورة '.' 90*110']])->fileInput() ?>
     
+    <?= $form->field($model, 'photo', ['labelOptions'=>['label'=>'صورة '.' 90*110']])->fileInput() ?>
     <?php if($model->photo != ''){ ?>
     <p>
     <?= Html::img(Yii::$app->request->baseUrl.'/media/condition/'.$model->photo, ['width'=>300]) ?>
@@ -60,6 +58,15 @@ use yii\helpers\Url;
         <h3>Image Gallery </h3>
         <h4>Please save first in order to add photos.</h4>
 <?php } ?>
+    
+    <?= $form->field($model, 'papers_pdf')->fileInput() ?>
+    <?php if($model->papers_pdf != ''){ ?>
+    <p>
+    <?= Html::a(Html::img(Yii::$app->request->baseUrl.'/img/pdf.png', ['width'=>80]), Yii::$app->request->baseUrl.'/madia/condition/pdf/'.$model->papers_pdf, ['target' => '_blank']) ?>
+        <br/>
+        <?= Html::a('حذف', Url::to(['delete-pdf', 'id'=>$model->id]), ['data'=>['confirm'=>'هل تريد حذف الملف بالفعل؟']]) ?>
+    </p>
+    <?php } ?>
 
     <?= $form->field($model, 'notes')->textarea(['rows' => 6]) ?>
     

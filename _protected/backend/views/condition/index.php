@@ -39,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'address',
         'phone',
-        'mobile',
         'cid',
         [
             'attribute'=>'type_id',

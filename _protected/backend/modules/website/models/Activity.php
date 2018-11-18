@@ -1,8 +1,11 @@
 <?php
 
 namespace backend\modules\website\models;
-use zxbodya\yii2\galleryManager\GalleryBehavior;
 
+use zxbodya\yii2\galleryManager\GalleryBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\db\Expression;
 use Yii;
 
 /**
@@ -10,9 +13,15 @@ use Yii;
  *
  * @property integer $id
  * @property string $title
+ * @property string $intro
+ * @property string $details
+ * @property string $image
+ * @property string $sort
  * @property string $slug
- * @property integer $gallery_id
- * @property integer $sort
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $created_by
+ * @property string $updated_by
  */
 class Activity extends \yii\db\ActiveRecord {
 
@@ -23,14 +32,20 @@ class Activity extends \yii\db\ActiveRecord {
                 'attribute' => 'title',
                 'slugAttribute' => 'slug',
             ],
+            [
+                'class' => TimestampBehavior::className(),
+                //'createdAtAttribute' => 'create_time',
+                //'updatedAtAttribute' => 'update_time',
+                'value' => new Expression('NOW()'),
+            ],
             'galleryBehavior' => [
                 'class' => GalleryBehavior::className(),
                 'type' => 'activity',
                 'extension' => 'jpg',
                 'directory' => Yii::getAlias('@webroot') . '/media/activity',
                 'url' => Yii::getAlias('@web') . '/media/activity',
-                'hasName'=>false,
-                'hasDescription'=>false,
+                'hasName' => false,
+                'hasDescription' => false,
                 'versions' => [
                     'small' => function ($img) {
                         /** @var \Imagine\Image\ImageInterface $img */
@@ -62,7 +77,10 @@ class Activity extends \yii\db\ActiveRecord {
     public function rules() {
         return [
             [['gallery_id', 'sort'], 'integer'],
-            [['title', 'slug'], 'string', 'max' => 255]
+            [['intro'], 'string', 'max' => 555],
+            [['title', 'image', 'slug'], 'string', 'max' => 255],
+            [['created_at', 'updated_at'], 'safe'],
+            [['details'], 'string']
         ];
     }
 
@@ -73,17 +91,21 @@ class Activity extends \yii\db\ActiveRecord {
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'intro' => 'Intro',
+            'details' => 'Details',
             'slug' => 'Slug',
             'gallery_id' => 'Gallery ID',
             'sort' => 'Sort',
+            'created_at' => 'Created At',
+            'created_at' => 'Updated At',
         ];
     }
-    
+
     public function getMedium() {
         $images = $this->getBehavior('galleryBehavior')->getImages();
         $first = reset($images);
         if ($first)
-            return Yii::$app->request->baseUrl . '/backend/media/activity/' . $this->id.'/'.$first->rank.'/medium.jpg';
+            return Yii::$app->request->baseUrl . '/backend/media/activity/' . $this->id . '/' . $first->rank . '/medium.jpg';
         return '';
     }
 

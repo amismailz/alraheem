@@ -18,23 +18,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Banner', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'title',
             [
-            	'label'=>'image',
-    			'value'=>function ($data) {
-			    			return Html::img(Yii::$app->request->baseUrl.'/media/banner/'.$data->image, ['width'=>200, 'alt'=>'no image']);
-			    },
-            	'format'=>'raw'
-			],
-            
+                'label' => 'image',
+                'value' => function ($data) {
+                    return Html::img(Yii::$app->request->baseUrl . '/media/banner/' . $data->image, ['width' => 200, 'alt' => 'no image']);
+                },
+                'format' => 'raw'
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+    ?>
 
 </div>

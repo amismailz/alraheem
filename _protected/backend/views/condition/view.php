@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'address',
             'phone',
-            'mobile',
             [
                 'attribute'=>'type_id',
                 'value'=>$model->type? $model->type->title : Yii::t('app', 'Not set')
@@ -52,6 +51,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'photo',
                 'value' => Html::img(Yii::$app->request->baseUrl . '/media/condition/' . $model->photo, ['width' => 300]),
+                'format' => 'raw'
+            ],
+            [
+                'attribute' => 'papers_pdf',
+                'value' => Html::a(Html::img(Yii::$app->request->baseUrl.'/img/pdf.png', ['width'=>80]), Yii::$app->request->baseUrl.'/madia/condition/pdf/'.$model->papers_pdf, ['target' => '_blank']),
                 'format' => 'raw'
             ],
             'notes:ntext',

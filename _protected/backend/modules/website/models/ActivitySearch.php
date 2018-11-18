@@ -61,7 +61,7 @@ class ActivitySearch extends Activity
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'slug', $this->slug]);
+            ->andFilterWhere(['like', 'details', $this->details]);
 
         return $dataProvider;
     }

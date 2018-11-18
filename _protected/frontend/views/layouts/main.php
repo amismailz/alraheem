@@ -54,32 +54,16 @@ use yii\helpers\Html;
             <div class="collapse navbar-collapse clearfix in" id="bs-example-navbar-collapse-111">
                 <ul class="nav navbar-nav navbar-right">
                   <li role="presentation"  class="active"><a href="index.html">الرئيسية</a></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">عن الجمعية <span class="caret fl-left"></span></a>
-                    <ul class="dropdown-menu dropdown-inside"  class="nav nav-tabs" role="tablist">
-                      <li><a href="who.html #who">من نحن</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="who.html #mission">الرؤية والرسالة</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="who.html #success">الإنجازات</a></li>
-                    </ul>
+                  <li>
+                    <a href="#about"  class="page-scroll">عن الجمعية </a>
                   </li>
                   <li>
                     <a href="#services"  class="page-scroll">أنشطة الجمعية </a>
                   </li>
                   <li> <a href="#donate" class="page-scroll">برامج الرحيم</a></li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">المركز الإعلامي<span class="caret fl-left"></span></a>
-                    <ul class="dropdown-menu dropdown-inside">
-                      <li><a href="#news">أخبار الجمعية</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#gallery">مكتبة الصور</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#donate-ways">طرق التبرع</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">مكتبة الفيديو</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="#donate-ways">طرق التبرع</a></li>
+                  <li><a href="#news">أخبار الجمعية</a></li>
+                  <li><a href="#gallery">مكتبة الصور</a></li>
                   <li><a href="#contact-us">اتصل بنا</a></li>
                   <li><a id="facebook" class="ficon" href="https://www.facebook.com/elraheem1"><i class="fa fa-facebook"></i></a><a id="twitter" class="ficon" href="#"><i class="fa fa-twitter"></i></a><a id="google-plus" class="ficon" href="#"><i class="fa fa-google-plus"></i></a><a id="youtube" class="ficon" href="#"><i class="fa fa-youtube"></i></a></li>
                 </ul>
@@ -107,7 +91,7 @@ use yii\helpers\Html;
                          <li><a href="#contact-us">اتصل بنا</a></li>
                      </ul>
                      <ul class="fl-right col-sm-6">
-                         <li><a href="#gallery">معرض الصور</a></li>
+                         <li><a href="#gallery">مكتبة الصور</a></li>
                          <li><a href="#news">أخر الأخبار</a></li>
                          <li><a href="#">مركز غسيل الكلى</a></li>
                          <li><a href="services.html">أنشطة الجمعية</a></li>

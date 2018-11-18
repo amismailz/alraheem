@@ -19,7 +19,7 @@ class MemberSearch extends Member
     {
         return [
             [['id', 'job_id', 'cid', 'membership_number', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'phone', 'address', 'photo', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'phone', 'address', 'photo', 'created_at', 'updated_at', 'last_payment'], 'safe'],
         ];
     }
 

@@ -15,6 +15,9 @@ use Yii;
  * @property string $address
  * @property integer $membership_number
  * @property string $photo
+ * @property string $amount
+ * @property string $last_payment
+ * @property string $last_thanks_sms
  * @property string $created_at
  * @property string $updated_at
  * @property integer $created_by
@@ -39,9 +42,10 @@ class Member extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'phone'], 'required'],
-            [['job_id', 'cid', 'membership_number', 'created_by', 'updated_by'], 'integer'],
+            ['phone', 'string', 'max' => 11, 'min' => 11],
+            [['job_id', 'cid', 'amount', 'membership_number', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'phone', 'address', 'photo'], 'string', 'max' => 255]
+            [['name', 'address', 'photo', 'last_payment', 'last_thanks_sms'], 'string', 'max' => 255]
         ];
     }
 
@@ -59,6 +63,7 @@ class Member extends \yii\db\ActiveRecord
             'address' => Yii::t('app', 'Address'),
             'membership_number' => Yii::t('app', 'رقم العضوية'),
             'photo' => Yii::t('app', 'Photo'),
+            'amount' => Yii::t('app', 'المبلغ'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),

@@ -11,6 +11,7 @@ return [
     'Husband Name'=>'اسم الزوج',
     'Husband Cid'=>'رقم بطاقة الزوج',
     'Research Num'=>'رقم الملف',
+    'Papers PDF'=>'الاوراق في ملفPDF ',
     'Num Person'=>'عدد الافراد',
     'Notes'=>'ملاحظات',
     'Conditions'=>'الحالات',

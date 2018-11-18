@@ -80,20 +80,49 @@ class SiteController extends Controller {
         ];
     }
 
-    public function actionSendSms($id = null) {
-        $members = $id ? [ Member::findOne($id)] : Member::find()->all();
-        if (empty(reset($members)))
-            throw new NotFoundHttpException('The requested page does not exist.');
+    public function actionPaymentSms($id = null, $limit = 20) {
+        $members = $id ? 
+                [ Member::findOne($id) ] :
+            Member::find()
+                ->where('CHAR_LENGTH(phone) = 11')
+                ->andWhere('last_payment IS NULL OR last_payment != "' . date('Y-m').'"'  )
+                ->limit($limit)
+                ->all();
         $response = [];
         if (!empty($members))
             foreach ($members as $member) {
-                if (strlen($member->phone) === 11)
-                    $response[] = self::sendMemberSms($member);
+                $response[] = self::sendMemberPaymentSms($member);
             }
+        echo count($response);
         var_dump($response);
     }
+    
+//    public function actionSendSms($id = null) {
+//        if($id){
+//            $response = self::sendMemberSms(Member::findOne($id));
+//        } else {
+//            $response = self::sendInRecursion();
+//        }
+//        var_dump($response);
+//    }
+    
+//    public static function sendInRecursion() {
+//        $response = [];
+//        $notPayedMember = Member::find()->where([ 'last_payment' => null ])->orWhere([ '!=', 'last_payment', date('Y-m') ])->one();
+//            if($notPayedMember) {
+//                $response[] = self::sendMemberSms($notPayedMember);
+//                $notPayedMember->last_payment = date('Y-m');
+//                $notPayedMember->save();
+//                self::sendInRecursion();
+//            } else{
+//                return $response;
+//            }        
+//    }
 
-    public static function sendMemberSms($member) {
+    public static function sendMemberPaymentSms($member) {
+        // Save last payment
+        $member->last_payment =  date('Y-m');
+        $member->save(false);
         // Begin list from last payment year. If no payment at all, begin from current year
         $lastPayment = MemberPayment::find()->where(['member_id' => $member->id])->orderBy('year DESC')->one();
         $firstYear = $lastPayment ? $lastPayment->year : date('Y');
@@ -112,10 +141,42 @@ class SiteController extends Controller {
             // @todo adjust array length to not exceed sms limit
             $text = 'نذكركم بالاشتراك الشهري عن شهر ' . implode(',', array_slice($rtlArray, 0, 7));
             $client = new Client();
-            return $client->Messages->Send(intval("2$member->phone"), $text, "Alra7eem"); // send regular massage
+            return self::sendSms($text, $member->phone);
         }
     }
+    
+    
+    public function actionSendThanksSms($id = null, $limit = 20) {
+        $members = $id ? 
+                [ Member::findOne($id)] :
+            Member::find()
+                ->where('CHAR_LENGTH(`phone`) = 11')
+                ->andWhere('(last_thanks_sms IS NULL) OR (last_thanks_sms != "' . date('Y-m') .'")'  )
+                ->limit($limit)
+                ->all();
+        $response = [];
+        $text = 'أسرة جمعية الرحيم تتوجه إليكم بخالص الشكر لما قدمتموه من الخير';
+        if (!empty($members))
+            foreach ($members as $member) {
+                    $response[] = self::sendSms($text, $member->phone);
+                    // Save last action
+                    $member->last_thanks_sms =  date('Y-m');
+                    $member->save(false);
+            }
+        echo count($response);
+        var_dump($response);
+    }
 
+    /**
+     * 
+     * @param type $text message content
+     * @param type $phone_number the receiver phone number
+     * @return array response from unifonic api
+     */
+    public static function sendSms($text, $phone_number) {
+        $client = new Client();
+        return $client->Messages->Send(intval("2$phone_number"), $text, "Elraheem"); // send regular massage
+    }
 //------------------------------------------------------------------------------------------------//
 // STATIC PAGES
 //------------------------------------------------------------------------------------------------//

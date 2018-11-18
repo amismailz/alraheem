@@ -25,6 +25,7 @@ use Yii;
  * @property string $research_num
  * @property integer $num_person
  * @property string $photo
+ * @property string $papers_pdf
  * @property string $notes
  * @property string $created_at
  * @property string $updated_at
@@ -92,12 +93,13 @@ class Condition extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
+            ['phone', 'string', 'max' => 11, 'min' => 11],
             [['name', 'cid', 'phone', 'mobile', 'research_num', 'husband_cid'], 'unique'],
             [['cid', 'husband_cid'], 'integer'],
             [['type_id', 'zone_id', 'aid_type_id', 'num_person', 'created_by', 'updated_by'], 'integer'],
             [['notes'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'address', 'phone', 'mobile', 'husband_name', 'research_num', 'photo'], 'string', 'max' => 255]
+            [['name', 'address', 'phone', 'mobile', 'husband_name', 'research_num', 'photo', 'papers_pdf'], 'string', 'max' => 255]
         ];
     }
 
@@ -122,6 +124,7 @@ class Condition extends \yii\db\ActiveRecord
             'num_person' => Yii::t('app', 'Num Person'),
             'notes' => Yii::t('app', 'Notes'),
             'photo' => Yii::t('app', 'Photo'),
+            'papers_pdf' => Yii::t('app', 'Papers PDF'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'created_by' => Yii::t('app', 'Created By'),

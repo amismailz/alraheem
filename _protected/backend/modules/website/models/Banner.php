@@ -19,7 +19,7 @@ class Banner extends \yii\db\ActiveRecord
 {
     public static function tableName()
     {
-        return '{{alr_banner}}';
+        return '{{web_banner}}';
     }
 
     /**
