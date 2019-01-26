@@ -84,6 +84,30 @@ class MemberController extends BackendController {
             return 1;
         return $this->redirect(['payments', 'id' => $id]);
     }
+    
+    public function actionBarcodePayment() {
+        if (Yii::$app->request->post() && isset(Yii::$app->request->post()['member_id'])) {
+            $id = Yii::$app->request->post()['member_id'];
+            $member = Member::findOne($id);
+            if (!$member) {
+                Yii::$app->session->setFlash('err', 'لا يوجد عضو بهذا الرقم');
+                return $this->refresh();
+            }
+            $payment = new MemberPayment;
+            $payment->member_id = $id;
+            $payment->month = date('m');
+            $payment->year = date('Y');
+            $payment->payed_at = date('Y-m-d H:i');
+            $payment->payed_by = Yii::$app->user->identity->id;
+            if($payment->save())
+                Yii::$app->session->setFlash('success', 'تم التسجيل بنجاح');
+             else {
+                Yii::$app->session->setFlash('err', 'حدث خطأ غير معروف');
+            }
+        }
+
+        return $this->render('barcode-payment');
+    }
 
     /**
      * Displays a single Member model.

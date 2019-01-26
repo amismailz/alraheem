@@ -76,7 +76,7 @@ class Activity extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['gallery_id', 'sort'], 'integer'],
+            [['gallery_id', 'sort', 'created_by', 'updated_by'], 'integer'],
             [['intro'], 'string', 'max' => 555],
             [['title', 'image', 'slug'], 'string', 'max' => 255],
             [['created_at', 'updated_at'], 'safe'],
@@ -93,6 +93,7 @@ class Activity extends \yii\db\ActiveRecord {
             'title' => 'Title',
             'intro' => 'Intro',
             'details' => 'Details',
+            'image' => 'Image',
             'slug' => 'Slug',
             'gallery_id' => 'Gallery ID',
             'sort' => 'Sort',

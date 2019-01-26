@@ -12,7 +12,6 @@ use Yii;
  * @property string $link
  * @property string $details
  * @property string $image
- * @property integer $subtitle
  * @property integer $button_text
  */
 class Banner extends \yii\db\ActiveRecord
@@ -28,10 +27,9 @@ class Banner extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['details'], 'string'],
             [['image'], 'file'],
             [['link'], 'url'],
-            [['subtitle', 'title'], 'string', 'max' => 255]
+            [['title'], 'string', 'max' => 255]
         ];
     }
 
@@ -44,9 +42,7 @@ class Banner extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'link' => 'Link',
-            'details' => 'Details',
-            'image' => 'Image',
-            'subtitle' => 'Subtitle'
+            'image' => 'Image'
             ];
     }
 }

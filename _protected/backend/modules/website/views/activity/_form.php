@@ -11,11 +11,20 @@ use zxbodya\yii2\galleryManager\GalleryManager;
 
 <div class="activity-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+    	'options' => ['enctype' => 'multipart/form-data']
+    	]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'details')->textarea(['rows' => 6])->widget(\mihaildev\ckeditor\CKEditor::className(), ['editorOptions'=>['language'=>'ar']]) ?>
-
+    <?= $form->field($model, 'image', ['labelOptions' => ['label' => 'Image (960*720 px)']])->fileInput() ?>
+    <div class="form-group field-banner-image">
+        <?php
+        if ($model->image != '') {
+            echo Html::img(Yii::$app->request->baseUrl . '/media/activity/' . $model->image, ['width' => 300, 'alt' => 'no image']);
+        }
+        ?>
+    </div>
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <?php if (!$model->isNewRecord) { ?>     

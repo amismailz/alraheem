@@ -15,7 +15,6 @@ use yii\widgets\ActiveForm;
     	]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 255]) ?>
-    <?= $form->field($model, 'subtitle')->textInput(['maxlength' => 255]) ?>
 
     <!--?= $form->field($model, 'details')->widget(MultiLanguageActiveField::className(), ['inputType'=>'textArea']) ?-->
 

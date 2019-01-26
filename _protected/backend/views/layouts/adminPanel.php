@@ -73,7 +73,6 @@ use backend\models\AidType;
                     <li class="<?php echo CssHelper::adminActivate('member-job'); ?>">
                         <a href="<?= Yii::$app->urlManager->createAbsoluteUrl('member-job') ?>"><i class="fa fa-circle-o"></i> <?= Yii::t('app', 'الوظائف') ?></a>
                     </li>
-
                 </ul>
             </li>
             <li class="<?php echo CssHelper::adminActivate('user'); ?>">

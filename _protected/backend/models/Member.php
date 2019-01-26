@@ -41,7 +41,7 @@ class Member extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'phone'], 'required'],
+            [['name'], 'required'],
             ['phone', 'string', 'max' => 11, 'min' => 11],
             [['job_id', 'cid', 'amount', 'membership_number', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],

@@ -39,7 +39,7 @@ class News extends \yii\db\ActiveRecord {
             [['title'], 'required'],
             [['details'], 'string'],
             [['created_at', 'updated_at'], 'safe'],
-            [['featured'], 'integer'],
+            [['featured', 'created_by', 'updated_by'], 'integer'],
             [['title', 'image', 'slug'], 'string', 'max' => 255],
             [['intro'], 'string', 'max' => 555]
         ];

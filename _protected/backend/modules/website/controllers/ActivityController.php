@@ -57,13 +57,30 @@ class ActivityController extends BaseController {
      */
     public function actionCreate() {
         $model = new Activity();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                        'model' => $model,
-            ]);
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
+            // get the uploaded file instance. for multiple file uploads
+            // the following data will return an array
+            $file = \yii\web\UploadedFile::getInstance($model, 'image');
+
+            if (!empty($file)) {
+                // store the source file name
+                $arr = explode(".", $file->name);
+                $ext = end($arr);
+                // generate a unique file name
+                $rand = Yii::$app->security->generateRandomString();
+                $model->image = $rand . ".{$ext}";
+                // the path to save file, you can set an uploadPath
+                $path = Yii::getAlias('@webroot') . '/media/activity/' . $model->image;
+                $file->saveAs($path);
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+        return $this->render('create', [
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -75,13 +92,35 @@ class ActivityController extends BaseController {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
+        if (Yii::$app->request->isPost) {
+            if ($model->image != '') {
+                $_POST['Activity']['image'] = $model->image;
+            }
+            $model->load(Yii::$app->request->post());
+            $file = \yii\web\UploadedFile::getInstance($model, 'image');
+
+            if (!empty($file)) {
+                if ($model->image == '') {
+                    // store the source file name
+                    $arr = explode(".", $file->name);
+                    $ext = end($arr);
+                    // generate a unique file name
+                    $rand = Yii::$app->security->generateRandomString();
+                    $model->image = $rand . ".{$ext}";
+                }
+
+                // the path to save file, you can set an uploadPath
+                $path = Yii::getAlias('@webroot') . '/media/activity/' . $model->image;
+                $file->saveAs($path);
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('update', [
+                    'model' => $model,
+        ]);
     }
 
     /**

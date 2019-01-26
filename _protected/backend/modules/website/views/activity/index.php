@@ -26,6 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'title',
             'sort',
+            [
+                'label' => 'image',
+                'value' => function ($data) {
+                    return Html::img(Yii::$app->request->baseUrl . '/media/activity/' . $data->image, ['width' => 200, 'alt' => 'no image']);
+                },
+                'format' => 'raw'
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

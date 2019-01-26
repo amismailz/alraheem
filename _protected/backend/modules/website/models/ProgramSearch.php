@@ -19,7 +19,7 @@ class ProgramSearch extends Program
     {
         return [
             [['id', 'featured', 'temp2'], 'integer'],
-            [['title', 'intro', 'details', 'image', 'slug', 'date_created'], 'safe'],
+            [['title', 'intro', 'details', 'image', 'slug'], 'safe'],
         ];
     }
 
@@ -53,7 +53,6 @@ class ProgramSearch extends Program
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'date_created' => $this->date_created,
             'featured' => $this->featured,
             'temp2' => $this->temp2,
         ]);

@@ -29,7 +29,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'details:raw',
             'sort',
-            
+            [
+                'label' => 'Image',
+                'value' => Html::img(Yii::$app->request->baseUrl . '/media/activity/' . $model->image, ['width' => 600, 'alt' => 'no image']),
+                'format' => 'raw'
+            ]
         ],
     ]) ?>
 

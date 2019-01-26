@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
  	</div>
  	<?= $form->field($model, 'details')->textarea(['rows' => 6])->widget(\mihaildev\ckeditor\CKEditor::className(), ['editorOptions'=>['language'=>'ar']]) ?>
 
-    <?= $form->field($model, 'date_created')->widget(yii\jui\DatePicker::className(), ['clientOptions'=>['dateFormat' => 'yy-mm-dd']]) ?>
+    <!-- $form->field($model, 'date_created')->widget(yii\jui\DatePicker::className(), ['clientOptions'=>['dateFormat' => 'yy-mm-dd']]) -->
 
     <!--?= $form->field($model, 'slug')->textInput(['maxlength' => 255]) ?>
 

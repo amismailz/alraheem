@@ -20,6 +20,12 @@ use backend\models\MemberPayment;
 use yii\web\NotFoundHttpException;
 use Yii;
 
+use backend\modules\website\models\News;
+use backend\modules\website\models\Activity;
+use backend\modules\website\models\Program;
+use backend\modules\website\models\Banner;
+use backend\modules\website\models\Page;
+
 require('Unifonic/Autoload.php');
 
 use \Unifonic\API\Client;
@@ -79,6 +85,27 @@ class SiteController extends Controller {
             ],
         ];
     }
+    
+    /**
+     * Displays the index (home) page.
+     * Use it in case your home page contains static content.
+     *
+     * @return string
+     */
+    public function actionIndex() {
+        $about = Page::findOne(1);
+        $banners = Banner::find()->all();
+        $news = News::find()->orderBy('created_at')->all();
+        $activities = Activity::find()->orderBy('sort')->all();
+        $programs = Program::find()->all();
+        return $this->render('index', [
+            'about' => $about,
+            'banners' => $banners,
+            'news' => $news,
+            'activities' => $activities,
+            'programs' => $programs,
+        ]);
+    }
 
     public function actionPaymentSms($id = null, $limit = 20) {
         $members = $id ? 
@@ -125,7 +152,7 @@ class SiteController extends Controller {
         $member->save(false);
         // Begin list from last payment year. If no payment at all, begin from current year
         $lastPayment = MemberPayment::find()->where(['member_id' => $member->id])->orderBy('year DESC')->one();
-        $firstYear = $lastPayment ? $lastPayment->year : date('Y');
+        $firstYear = 2019; // As per client request, its asked to send SMS starting 2019 // $lastPayment ? $lastPayment->year : date('Y');
         $lastYear = intval(date('Y'));
         $notPayedMonths = [];
         for ($y = $firstYear; $y <= $lastYear; $y++) {
@@ -155,12 +182,33 @@ class SiteController extends Controller {
                 ->limit($limit)
                 ->all();
         $response = [];
-        $text = 'أسرة جمعية الرحيم تتوجه إليكم بخالص الشكر لما قدمتموه من الخير';
+        $text = ' نشكركم لمساهمتكم في رعاية الايتام والمرضى لعام 2018';
         if (!empty($members))
             foreach ($members as $member) {
                     $response[] = self::sendSms($text, $member->phone);
                     // Save last action
                     $member->last_thanks_sms =  date('Y-m');
+                    $member->save(false);
+            }
+        echo count($response);
+        var_dump($response);
+    }
+    
+    public function actionMembershipSms($id = null, $limit = 20) {
+        $members = $id ? 
+                [ Member::findOne($id)] :
+            Member::find()
+                ->where('CHAR_LENGTH(`phone`) = 11')
+                ->andWhere('(last_membership_sms IS NULL) OR (last_membership_sms != "' . date('Y-m') .'")'  )
+                ->limit($limit)
+                ->all();
+        $response = [];
+        if (!empty($members))
+            foreach ($members as $member) {
+                    $text = "رقم عضويتك هو ($member->id) برجاء ابلاغه لمستلم الاشتراك للأهمية";
+                    $response[] = self::sendSms($text, $member->phone);
+                    // Save last action
+                    $member->last_membership_sms =  date('Y-m');
                     $member->save(false);
             }
         echo count($response);
@@ -177,19 +225,7 @@ class SiteController extends Controller {
         $client = new Client();
         return $client->Messages->Send(intval("2$phone_number"), $text, "Elraheem"); // send regular massage
     }
-//------------------------------------------------------------------------------------------------//
-// STATIC PAGES
-//------------------------------------------------------------------------------------------------//
 
-    /**
-     * Displays the index (home) page.
-     * Use it in case your home page contains static content.
-     *
-     * @return string
-     */
-    public function actionIndex() {
-        return $this->render('index');
-    }
 
     /**
      * Displays the about static page.

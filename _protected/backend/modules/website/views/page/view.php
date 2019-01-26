@@ -35,16 +35,8 @@ $this->title = $model->title;
             ],
 //            'sort',
             'created_at',
-            'updated_at',
-            [
-                'attribute'=>'created_by',
-                'value'=>$model->createdBy->username
+            'updated_at'
             ],
-            [
-                'attribute'=>'updated_by',
-                'value'=>$model->updatedBy->username
-            ],
-        ],
     ]) ?>
 
 </div>

@@ -46,14 +46,15 @@ class NewsController extends BaseController {
         $model = new News();
         if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
-            $model->date_created = Yii::$app->formatter->asDate($model->date_created, "Y-M-d");
+//            $model->date_created = Yii::$app->formatter->asDate($model->date_created, "Y-M-d");
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
             $file = \yii\web\UploadedFile::getInstance($model, 'image');
 
             if (!empty($file)) {
                 // store the source file name
-                $ext = end((explode(".", $file->name)));
+                $arr = explode(".", $file->name);
+                $ext = end($arr);
                 // generate a unique file name
                 $rand = Yii::$app->security->generateRandomString();
                 $model->image = $rand . ".{$ext}";
@@ -84,13 +85,14 @@ class NewsController extends BaseController {
                 $_POST['News']['image'] = $model->image;
             }
             $model->load(Yii::$app->request->post());
-            $model->date_created = Yii::$app->formatter->asDate($model->date_created, "Y-M-d");
+//            $model->date_created = Yii::$app->formatter->asDate($model->date_created, "Y-M-d");
             $file = \yii\web\UploadedFile::getInstance($model, 'image');
 
             if (!empty($file)) {
                 if ($model->image == '') {
                     // store the source file name
-                    $ext = end((explode(".", $file->name)));
+                    $arr = explode(".", $file->name);
+                    $ext = end($arr);
                     // generate a unique file name
                     $rand = Yii::$app->security->generateRandomString();
                     $model->image = $rand . ".{$ext}";

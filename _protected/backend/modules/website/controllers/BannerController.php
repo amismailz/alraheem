@@ -57,7 +57,8 @@ class BannerController extends BaseController
     		if(!empty($file))
     		{
     			// store the source file name
-    			$ext = end((explode(".", $file->name)));
+    			$arr = explode(".", $file->name);
+    			$ext = end($arr);
     			// generate a unique file name
     			$rand = Yii::$app->security->generateRandomString();
     			$model->image = $rand.".{$ext}";
@@ -99,7 +100,8 @@ class BannerController extends BaseController
     		if($model->image =='')
     		{
     			// store the source file name
-    			$ext = end((explode(".", $file->name)));
+    			$arr = explode(".", $file->name);
+    			$ext = end($arr);
     			// generate a unique file name
     			$rand = Yii::$app->security->generateRandomString();
     			$model->image = $rand.".{$ext}";

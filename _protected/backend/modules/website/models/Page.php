@@ -2,7 +2,6 @@
 
 namespace backend\modules\website\models;
 use yii\behaviors\TimestampBehavior;
-use yii\behaviors\BlameableBehavior;
 use yii\db\Expression;
 use zxbodya\yii2\galleryManager\GalleryBehavior;
 use common\models\User;
@@ -16,14 +15,9 @@ use Yii;
  * @property string $details
  * @property string $slug
  * @property string $image
- * @property integer $sort
  * @property string $created_at
  * @property string $updated_at
- * @property integer $created_by
- * @property integer $updated_by
- *
- * @property User $createdBy
- * @property User $updatedBy
+ 
  */
 class Page extends \yii\db\ActiveRecord
 {
@@ -41,12 +35,6 @@ class Page extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
                 'value' => new Expression('NOW()'),
-            ],
-            BlameableBehavior::className(),
-            [
-                'class' => \yii\behaviors\SluggableBehavior::className(),
-                'attribute' => 'title',
-                'slugAttribute' => 'slug',
             ],
             'galleryBehavior' => [
                 'class' => GalleryBehavior::className(),
@@ -80,9 +68,8 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'school_id', 'details'], 'required'],
+            [['title', 'details'], 'required'],
             [['details'], 'string'],
-            [['sort', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'slug', 'image'], 'string', 'max' => 255],
         ];
@@ -99,27 +86,8 @@ class Page extends \yii\db\ActiveRecord
             'details' => 'Details',
             'slug' => 'Slug',
             'image' => 'Image',
-            'sort' => 'Sort',
             'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'updated_at' => 'Updated At'
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCreatedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUpdatedBy()
-    {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 }

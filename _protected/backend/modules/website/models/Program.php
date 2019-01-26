@@ -19,7 +19,6 @@ use Yii;
  * @property string $updated_at
  * @property string $created_by
  * @property string $updated_by
- * @property integer $featured
  */
 class Program extends \yii\db\ActiveRecord
 {
@@ -39,8 +38,7 @@ class Program extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['details'], 'string'],
-            [['date_created'], 'safe'],
-            [['featured', 'temp2'], 'integer'],
+            [['created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'image', 'slug'], 'string', 'max' => 255],
             [['intro'], 'string', 'max' => 555]
@@ -60,9 +58,7 @@ class Program extends \yii\db\ActiveRecord
             'image' => 'Image',
             'slug' => 'Slug',
             'created_at' => 'Created At',
-            'created_at' => 'Updated At',
-            'featured' => 'Featured',
-            'temp2' => 'Temp2',
+            'created_at' => 'Updated At'
         ];
     }
 	public function behaviors()

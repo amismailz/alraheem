@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             'title',
-            //'subtitle',
             [
                 'label' => 'Image',
                 'value' => Html::img(Yii::$app->request->baseUrl . '/media/banner/' . $model->image, ['width' => 600, 'alt' => 'no image']),

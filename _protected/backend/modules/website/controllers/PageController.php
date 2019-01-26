@@ -14,8 +14,8 @@ use yii\filters\AccessControl;
 /**
  * PageController implements the CRUD actions for Page model.
  */
-class PageController extends BaseController
-{
+class PageController extends BaseController {
+
     /**
      * Returns a list of behaviors that this component should behave as.
      * Here we use RBAC in combination with AccessControl filter.
@@ -26,7 +26,7 @@ class PageController extends BaseController
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'=>['delete'],
+                'only' => ['delete'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -42,7 +42,7 @@ class PageController extends BaseController
             ], // verbs
         ]; // return
     }
-    
+
     public function actions() {
         return [
             'galleryApi' => [
@@ -54,20 +54,17 @@ class PageController extends BaseController
             ],
         ];
     }
+
     /**
      * Lists all Page models.
      * @return mixed
      */
-    public function actionIndex($type)
-    {
-        if(!in_array($type, [Page::TYPE_INTRO, Page::TYPE_FACILITY, Page::TYPE_OWN]))
-            throw new NotFoundHttpException('The requested page does not exist.');
+    public function actionIndex() {
         $searchModel = new PageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->andWhere(['type'=>$type]);
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -76,51 +73,44 @@ class PageController extends BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
-/**
+    /**
      * Creates a new Page model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($type)
-    {
-        if(!in_array($type, [Page::TYPE_INTRO, Page::TYPE_FACILITY, Page::TYPE_OWN]))
-            throw new NotFoundHttpException('The requested page does not exist.');
+    public function actionCreate() {
         $model = new Page();
-        $model->type = $type;
-    	if (Yii::$app->request->isPost) {
-    		$model->load(Yii::$app->request->post());
+        if (Yii::$app->request->isPost) {
+            $model->load(Yii::$app->request->post());
 
-    		// get the uploaded file instance. for multiple file uploads
-    		// the following data will return an array
-    		$file = \yii\web\UploadedFile::getInstance($model, 'image');
+            // get the uploaded file instance. for multiple file uploads
+            // the following data will return an array
+            $file = \yii\web\UploadedFile::getInstance($model, 'image');
 
-    		if(!empty($file))
-    		{
-    			// store the source file name
-    			$ext = end((explode(".", $file->name)));
-    			// generate a unique file name
-    			$rand = Yii::$app->security->generateRandomString();
-    			$model->image = $rand.".{$ext}";
-    			// the path to save file, you can set an uploadPath
-    			$path = Yii::getAlias('@webroot') .'/media/page/'.$model->image;
-    			$file->saveAs($path);
-
-    		}
-    			if($model->save()){
-    				return $this->redirect(['view', 'id'=>$model->id, 'type'=>$type]);
-    			}
-    	}
-    		return $this->render('create', [
-    		'model' => $model,
-    		]);
-
+            if (!empty($file)) {
+                // store the source file name
+                $arr = explode(".", $file->name);
+                $ext = end($arr);
+                // generate a unique file name
+                $rand = Yii::$app->security->generateRandomString();
+                $model->image = $rand . ".{$ext}";
+                // the path to save file, you can set an uploadPath
+                $path = Yii::getAlias('@webroot') . '/media/page/' . $model->image;
+                $file->saveAs($path);
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+        return $this->render('create', [
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -129,55 +119,52 @@ class PageController extends BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-    	if (Yii::$app->request->isPost) {
-    		if( $model->image != ''){
-    			$_POST['Page']['image'] = $model->image;
-    		}
-    		$model->load(Yii::$app->request->post());
+        if (Yii::$app->request->isPost) {
+            if ($model->image != '') {
+                $_POST['Page']['image'] = $model->image;
+            }
+            $model->load(Yii::$app->request->post());
 
-    		$file = \yii\web\UploadedFile::getInstance($model, 'image');
+            $file = \yii\web\UploadedFile::getInstance($model, 'image');
 
-    	if(!empty($file))
-    	{
-    		if($model->image =='')
-    		{
-    			// store the source file name
-    			$ext = end((explode(".", $file->name)));
-    			// generate a unique file name
-    			$rand = Yii::$app->security->generateRandomString();
-    			$model->image = $rand.".{$ext}";
-    		}
+            if (!empty($file)) {
+                if ($model->image == '') {
+                    // store the source file name
+                    $arr = explode(".", $file->name);
+                    $ext = end($arr);
+                    // generate a unique file name
+                    $rand = Yii::$app->security->generateRandomString();
+                    $model->image = $rand . ".{$ext}";
+                }
 
-    		// the path to save file, you can set an uploadPath
-    		$path = Yii::getAlias('@webroot') .'/media/page/'.$model->image;
-    		$file->saveAs($path);
+                // the path to save file, you can set an uploadPath
+                $path = Yii::getAlias('@webroot') . '/media/page/' . $model->image;
+                $file->saveAs($path);
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
 
-    	}
-        if ($model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'type'=>$model->type]);
-        } }
-
-			return $this->render('update', [
-                'model' => $model,
-            ]);
-
+        return $this->render('update', [
+                    'model' => $model,
+        ]);
     }
+
     /**
      * Deletes an existing Page model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $model = $this->findModel($id);
         $model->delete();
 
-        return $this->redirect(['index', 'type'=>$model->type]);
+        return $this->redirect(['index']);
     }
 
     /**
@@ -187,12 +174,12 @@ class PageController extends BaseController
      * @return Page the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

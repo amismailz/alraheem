@@ -18,7 +18,7 @@ class PageSearch extends Page
     public function rules()
     {
         return [
-            [['id', 'type', 'sort', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'sort'], 'integer'],
             [['title', 'details', 'slug', 'image', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -57,12 +57,8 @@ class PageSearch extends Page
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'school_id' => $this->school_id,
-            'sort' => $this->sort,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

@@ -6,36 +6,27 @@
                 <h4 class="fl-right">  آخر الأخبار :</h4>
             </div>
             <div class="col-xs-8 col-sm-9 col-md-10 ">
-                <marquee direction="right">بسم الله الرحمن الرحيم الحمد لله رب العالمين الرحمن الرحيم مالك يوم الدين إياك نعبد وإياك نستعين اهدنا الصراط المستقيم صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين</marquee>
+                <marquee direction="right">
+                    <?php if(!empty($news)) foreach ($news as $key => $newsItem) {
+                        echo $newsItem->intro;
+                        if($key < count($news) - 1) echo ' ** ';
+                    } ?>
+                </marquee>
             </div>
         </div>
     </div>
     <div class="conntainer-fluid">
         <div class="owl-carousel owl-theme" id="slider">
-            <div class="item">
+            <?php if(!empty($banners)) foreach ($banners as $banner) { ?>
+                <div class="item">
                 <figure>
-                    <img src="img/3.jpg" class="img-responsive">
+                    <img src="<?= Yii::$app->request->baseUrl ?>/backend/media/banner/<?= $banner->image ?>" class="img-responsive">
                     <figcaption>
-                        <h1 class="text-center">سارع في عمل الخير <br><small>الحسنة بعشر أمثالها</small></h1>
+                        <h1 class="text-center"><?= $banner->title ?> <br></h1>
                     </figcaption>
                 </figure>
             </div>
-            <div class="item">
-                <figure>
-                    <img src="img/4.jpg" class="img-responsive">
-                    <figcaption>
-                        <h1 class="text-center">سارع في عمل الخير <br><small>الحسنة بعشر أمثالها</small></h1>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="item">
-                <figure>
-                    <img src="img/5.jpg" class="img-responsive">
-                    <figcaption>
-                        <h1 class="text-center">سارع في عمل الخير <br><small>الحسنة بعشر أمثالها</small></h1>
-                    </figcaption>
-                </figure>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>
@@ -49,66 +40,18 @@
         </div>
         <div class="row">
             <div class="owl-carousel owl-theme" id="services-slider">
+                <?php if(!empty($activities)) foreach ($activities as $activity) { ?>
                 <div class="item">
                     <div class="thumbnail">
-                        <img src="img/7.jpg" class="img-responsive img-thumbnail">
+                        <img src="<?= Yii::$app->request->baseUrl ?>/backend/media/activity/<?= $activity->image ?>" class="img-responsive img-thumbnail">
                         <div class="caption">
-                            <h3 class="text-center">رعاية الفقراء</h3>
-                            <p>إن كان لديك موقع أو حسابات في الشبكات الاجتماعية والمنتديات ستتمكن من الاستفادة من ذلك</p>
-                            <p class="text-left"><a href="services.html #service-1" class="btn btn-secondary" role="presentation">التفاصيل</a> </p>
+                            <h3 class="text-center"><?= $activity->title ?></h3>
+                            <p><?= $activity->intro ?></p>
+                            <p class="text-left"><a href="<?= Yii::$app->request->baseUrl ?>/activity-<?= $activity->slug ?>" class="btn btn-secondary" role="presentation">التفاصيل</a> </p>
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="thumbnail even">
-                        <img src="img/7.jpg" class="img-responsive img-thumbnail">
-                        <div class="caption">
-                            <h3 class="text-center">رعاية الفقراء</h3>
-                            <p>إن كان لديك موقع أو حسابات في الشبكات الاجتماعية والمنتديات ستتمكن من الاستفادة من ذلك</p>
-                            <p class="text-left"><a href="services.html #service-2" class="btn btn-secondary" role="presentation" target="service-2">التفاصيل</a> </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="thumbnail">
-                        <img src="img/7.jpg" class="img-responsive img-thumbnail">
-                        <div class="caption">
-                            <h3 class="text-center">رعاية الفقراء</h3>
-                            <p>إن كان لديك موقع أو حسابات في الشبكات الاجتماعية والمنتديات ستتمكن من الاستفادة من ذلك</p>
-                            <p class="text-left"><a href="services.html #service-3" class="btn btn-secondary" role="button">التفاصيل</a> </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="thumbnail even">
-                        <img src="img/7.jpg" class="img-responsive img-thumbnail">
-                        <div class="caption">
-                            <h3 class="text-center">رعاية الفقراء</h3>
-                            <p>إن كان لديك موقع أو حسابات في الشبكات الاجتماعية والمنتديات ستتمكن من الاستفادة من ذلك</p>
-                            <p class="text-left"><a href="services.html #service-4" class="btn btn-secondary" role="button">التفاصيل</a> </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="thumbnail">
-                        <img src="img/7.jpg" class="img-responsive img-thumbnail">
-                        <div class="caption">
-                            <h3 class="text-center">رعاية الفقراء</h3>
-                            <p>إن كان لديك موقع أو حسابات في الشبكات الاجتماعية والمنتديات ستتمكن من الاستفادة من ذلك</p>
-                            <p class="text-left"><a href="services.html #service-5" class="btn btn-secondary" role="button">التفاصيل</a> </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="thumbnail even">
-                        <img src="img/7.jpg" class="img-responsive img-thumbnail">
-                        <div class="caption">
-                            <h3 class="text-center">رعاية الفقراء</h3>
-                            <p>إن كان لديك موقع أو حسابات في الشبكات الاجتماعية والمنتديات ستتمكن من الاستفادة من ذلك</p>
-                            <p class="text-left"><a href="services.html #service-6" class="btn btn-secondary" role="button">التفاصيل</a> </p>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
         </div> <!-- row -->
     </div> <!-- container -->
@@ -121,13 +64,15 @@
                 <h2>أخبار الجمعية</h2>
                 <h4 class="text-muted">اخبار الخدمات والأنشطة المختلفة بالجمعية</h4>
             </div>
+            <?php if(!empty($news)) { ?>
+            <?php $latestNews = $news[0] ?>
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-sm-6">
-                        <a href="#"><img src="img/7.jpg" class="img-responsive img-center img-thumbnail"></a>
+                        <a href="<?= Yii::$app->request->baseUrl ?>/news-<?= $latestNews->slug ?>"><img src="<?= Yii::$app->request->baseUrl ?>/backend/media/news/<?= $latestNews->image ?>" class="img-responsive img-center img-thumbnail"></a>
                     </div>
                     <div class="col-sm-6  clearfix">
-                        <a href="#"><h4><strong>احجز الآن لعمرة رجب</strong></h4></a>
+                        <a href="<?= Yii::$app->request->baseUrl ?>/news-<?= $latestNews->slug ?>"><h4><strong><?= $latestNews->title ?></strong></h4></a>
                         <a href="#"><p>تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب تم فتح باب الحجز لعمرة شهر رجب </p></a> 
                      <!-- <a href="#"><p class="text-left"><i class="fa fa-share-alt"></i></p></a> -->
                     </div>
@@ -136,83 +81,26 @@
             <div class="col-md-4">
                 <h4 id="side-news">آخر الأخبار</h4>
                 <ul class="newsticker">
+                    <?php foreach ($news as $newsItem) { ?>
                     <li>
-                        <a href="#">
+                        <a href="<?= Yii::$app->request->baseUrl ?>/news-<?= $newsItem->slug ?>">
                             <div class="row newsticker-item">
                                 <div class="col-xs-4 side-news-img">
-                                    <img src="img/7.jpg" class="img-responsive">
+                                    <img src="<?= Yii::$app->request->baseUrl ?>/backend/media/news/<?= $newsItem->image ?>" class="img-responsive">
                                 </div>
                                 <div class="col-xs-8">
-                                    <p>بدء دورة تعليم الخط العربي ومهارات الكتابة</p>
+                                    <p><?= $newsItem->title ?></p>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <div class="row newsticker-item">
-                                <div class="col-xs-4 side-news-img">
-                                    <img src="img/7.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-xs-8">
-                                    <p>بدء دورة تعليم الخط العربي ومهارات الكتابة</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="row newsticker-item">
-                                <div class="col-xs-4 side-news-img">
-                                    <img src="img/7.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-xs-8">
-                                    <p>بدء دورة تعليم الخط العربي ومهارات الكتابة</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="row newsticker-item">
-                                <div class="col-xs-4 side-news-img">
-                                    <img src="img/7.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-xs-8">
-                                    <p>بدء دورة تعليم الخط العربي ومهارات الكتابة</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="row newsticker-item">
-                                <div class="col-xs-4 side-news-img">
-                                    <img src="img/7.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-xs-8">
-                                    <p>بدء دورة تعليم الخط العربي ومهارات الكتابة</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="row newsticker-item">
-                                <div class="col-xs-4 side-news-img">
-                                    <img src="img/7.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-xs-8">
-                                    <p>بدء دورة تعليم الخط العربي ومهارات الكتابة</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
+                    <?php } ?>
                 </ul>
             </div>
             <div class="col-md-12 text-center" id="all-news">
-                <p> <a href="news.html" class="btn btn-secondary">كافة الأخبار</a></p>
+                <p> <a href="<?= Yii::$app->request->baseUrl ?>/news" class="btn btn-secondary">كافة الأخبار</a></p>
             </div>
+            <?php } ?> 
         </div>
     </div>
 </section>
@@ -223,13 +111,14 @@
             <div class="col-md-12 text-center section-title">
                 <h2>برامج الرحيم</h2>
             </div>
+            <?php if(!empty($programs)) foreach ($programs as $program) { ?>
             <div class="col-md-4 col-sm-6 donate-item">
                 <figure>
-                    <img src="img/7.jpg" class="img-responsive">
-                    <span class="text-center">اكفل طفل يتيم</span>
+                    <img src="<?= Yii::$app->request->baseUrl ?>/backend/media/program/<?= $program->image ?>" class="img-responsive">
+                    <span class="text-center"><?= $program->title ?></span>
                     <figcaption>
-                        <h3 class="text-center">اكفل يتيم</h3>
-                        <p>اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة</p>
+                        <h3 class="text-center"><?= $program->title ?></h3>
+                        <p><?= $program->intro ?></p>
                         <ul class="list-inline text-left">
                             <li><a href="donate.html"  type="button" class="btn btn-secondary">التفاصيل</a></li>
                             <li><a href="#donate-ways" class="btn btn-primary">شارك معنا</a></li>
@@ -237,76 +126,7 @@
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-md-4 col-sm-6 donate-item">
-                <figure>
-                    <img src="img/7.jpg" class="img-responsive">
-                    <span class="text-center">اكفل طفل يتيم</span>
-                    <figcaption>
-                        <h3 class="text-center">اكفل يتيم</h3>
-                        <p>اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة</p>
-                        <ul class="list-inline text-left">
-                            <li><a href="donate.html"  type="button" class="btn btn-secondary">التفاصيل</a></li>
-                            <li><a href="#donate-ways" class="btn btn-primary">شارك معنا</a></li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-6 donate-item">
-                <figure>
-                    <img src="img/7.jpg" class="img-responsive">
-                    <span class="text-center">اكفل طفل يتيم</span>
-                    <figcaption>
-                        <h3 class="text-center">اكفل يتيم</h3>
-                        <p>اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة</p>
-                        <ul class="list-inline text-left">
-                            <li><a href="donate.html"  type="button" class="btn btn-secondary">التفاصيل</a></li>
-                            <li><a href="#donate-ways" class="btn btn-primary">شارك معنا</a></li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-6 donate-item">
-                <figure>
-                    <img src="img/7.jpg" class="img-responsive">
-                    <span class="text-center">اكفل طفل يتيم</span>
-                    <figcaption>
-                        <h3 class="text-center">اكفل يتيم</h3>
-                        <p>اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة</p>
-                        <ul class="list-inline text-left">
-                            <li><a href="donate.html"  type="button" class="btn btn-secondary">التفاصيل</a></li>
-                            <li><a href="#donate-ways" class="btn btn-primary">شارك معنا</a></li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-6 donate-item">
-                <figure>
-                    <img src="img/7.jpg" class="img-responsive">
-                    <span class="text-center">اكفل طفل يتيم</span>
-                    <figcaption>
-                        <h3 class="text-center">اكفل يتيم</h3>
-                        <p>اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة</p>
-                        <ul class="list-inline text-left">
-                            <li><a href="donate.html"  type="button" class="btn btn-secondary">التفاصيل</a></li>
-                            <li><a href="#donate-ways" class="btn btn-primary">شارك معنا</a></li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-6 donate-item">
-                <figure>
-                    <img src="img/7.jpg" class="img-responsive">
-                    <span class="text-center">اكفل طفل يتيم</span>
-                    <figcaption>
-                        <h3 class="text-center">اكفل يتيم</h3>
-                        <p>اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة اكفل طفل يتيم وكن جاراً لرسول الله -صلى الله عليه وسلم- في الجنة</p>
-                        <ul class="list-inline text-left">
-                            <li><a href="donate.html"  type="button" class="btn btn-secondary">التفاصيل</a></li>
-                            <li><a href="#donate-ways" class="btn btn-primary">شارك معنا</a></li>
-                        </ul>
-                    </figcaption>
-                </figure>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>

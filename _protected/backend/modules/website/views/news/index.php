@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     },
     'format'=>'raw'
     ],
-    'date_created',
+//    'date_created',
             //
             // 'slug',
             // 'home',
