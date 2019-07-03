@@ -167,6 +167,7 @@ class SiteController extends Controller {
             $rtlArray = array_reverse($notPayedMonths);
             // @todo adjust array length to not exceed sms limit
             $text = 'نذكركم بالاشتراك الشهري عن شهر ' . implode(',', array_slice($rtlArray, 0, 7));
+            $text .= "\n رقم عضويتك هو ($member->id)";
             $client = new Client();
             return self::sendSms($text, $member->phone);
         }
